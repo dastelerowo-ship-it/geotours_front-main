@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Vardotour — VIP Transportation Georgia</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <!-- film grain overlay -->
+  <div class="app-grain"></div>
+
+  <!-- loading screen -->
+  <div id="appLoader" class="app-loader">
+    <div class="app-loader__inner">
+      <div class="app-loader__logo">VARDO<span>TOUR</span></div>
+      <div class="app-loader__ring"></div>
+      <div class="app-loader__sub">VIP Transportation Georgia</div>
+    </div>
+  </div>
+
+  <!-- toast popup -->
+  <!-- <div id="appToast" class="app-toast"><span id="appToastText">Hello</span></div> -->
+
+  <app-root></app-root>
+
+  <script>
+    // Loading screen — hide once Angular has had a frame to render
+    (function () {
+      var loader = document.getElementById('appLoader');
+      function hide() {
+        if (!loader) return;
+        loader.classList.add('hide');
+        setTimeout(function () { loader.remove(); }, 800);
+      }
+      window.addEventListener('load', function () { setTimeout(hide, 600); });
+      // safety net
+      setTimeout(hide, 4000);
+    })();
+
+    // Toast helper — exposed globally; usable from anywhere
+    (function () {
+      var toast = document.getElementById('appToast');
+      var text  = document.getElementById('appToastText');
+      var t;
+      window.showToast = function (msg) {
+        if (!toast || !text) return;
+        text.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(t);
+        t = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+      };
+    })();
+  </script>
+</body>
+</html>
